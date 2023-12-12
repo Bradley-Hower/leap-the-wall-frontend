@@ -24,9 +24,9 @@ https://trello.com/b/u4raS9Mc/leap-the-wall
 
 ## Wireframes
 
-INSERT PICTURES HERE
+![Leap the Wall - Landing Page](https://github.com/Bradley-Hower/leap-the-wall-frontend/assets/139923955/003b9638-88d1-4e40-8b9a-5df40906dab6)
 
-LANDING PAGE
+![Leap the Wall - Working Page](https://github.com/Bradley-Hower/leap-the-wall-frontend/assets/139923955/323e6017-7193-4ddc-99fb-cbca5155e1a6)
 
 ## User Stories and Kan Ban Board
 
@@ -34,8 +34,6 @@ https://trello.com/b/u4raS9Mc/leap-the-wall
 
 ## Domain Model and Schema
 
-INSERT PICTURES HERE
+![Leap the Wall - Domain Model](https://github.com/Bradley-Hower/leap-the-wall-frontend/assets/139923955/f5934e8d-0eb7-4313-b820-a1a314fee7f2)
 
-MODEL
-
-SCHEMA
+![Leap the Wall - Schema](https://github.com/Bradley-Hower/leap-the-wall-frontend/assets/139923955/1fe314ca-9819-4abd-9b10-0507ca12c6a2)
