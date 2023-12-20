@@ -37,3 +37,5 @@ https://trello.com/b/u4raS9Mc/leap-the-wall
 ![Leap the Wall - Domain Model](https://github.com/Bradley-Hower/leap-the-wall-frontend/assets/139923955/ece427f7-0624-42f8-a3c4-0b59cfd6ccfc)
 
 ![Leap the Wall - Schema](https://github.com/Bradley-Hower/leap-the-wall-frontend/assets/139923955/a3a01ad9-469f-41bd-94cc-d47b81f55b11)
+
+## Change Log
