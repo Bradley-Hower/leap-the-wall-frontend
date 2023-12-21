@@ -11,11 +11,12 @@ class ResultsItem extends React.Component{
     return(
       <section>
         <ListGroup style={{ width: '50rem', textAlign: 'left' }}>
-          <ListGroup.Item action>
-            <a href={this.props.link}>{this.props.title}</a>
+        {/* {this.props.title} */}
+          <ListGroup.Item>
+          <a href={this.props.link}>{this.props.title}</a>
           </ListGroup.Item>
           <ListGroup.Item>{this.props.snippet}</ListGroup.Item>
-          <ListGroup.Item><Image src={this.props.thumbnail}/></ListGroup.Item>
+          <ListGroup.Item><Image src={this.props.thumbnail} thumbnail /></ListGroup.Item>
         </ListGroup>
         <br />
       </section>

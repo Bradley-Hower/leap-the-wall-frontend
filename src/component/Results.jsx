@@ -12,15 +12,12 @@ class Results extends React.Component {
     return(
       <>
       <br />
-      {this.props.baidudata.organic_results.map((element, idx) => (
+      {this.props.searchResults.map((element, idx) => (
         <Col key={idx}>
 
 
-          <ResultsItem 
-          title={element.title}
-          link={element.link}
-          snippet={element.snippet}
-          thumbnail={element.thumbnail}
+
+          <ResultsItem title={element[idx][0]} snippet={element[idx][1]} link={element[idx][2]} thumbnail={element[idx][3]}
           // link={element.link} thumbnial={element.thumbnial} snippet={element.snippet}
           />
 

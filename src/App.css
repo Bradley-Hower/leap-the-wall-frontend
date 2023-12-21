@@ -50,3 +50,24 @@
   top: -3px;
 
 }
+
+h4 {
+  text-align: center;
+}
+p {
+  text-align: center;
+  margin-bottom: 0px;
+  font-size: 14px;
+}
+
+.navbar {
+  margin: 10px;
+  border-bottom: solid black 1px;
+}
+
+.btn-danger {
+  width: 40px;
+  padding: 3px;
+  font-size: 10px;
+
+}
