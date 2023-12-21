@@ -189,6 +189,7 @@ class App extends React.Component{
         <SearchForm handleform={this.handleForm} handlechange={this.handleChange} setpageNumber={this.setpageNumber}/>
 
         {this.state.searchResults && <Navigate to='/search' />}
+
         <Routes>
 
         <Route path='/' element={<></>} />
@@ -217,10 +218,11 @@ class App extends React.Component{
             <p>No searches yet.</p>
           )}
 
-        </div>
+
 
         </div>
-        </BrowserRouter>
+        </div>
+            </BrowserRouter>
         <div class='rendered'> 
         {this.state.searchResults.length > 0 && 
         <Results searchResults={this.state.searchResults} getSearches={this.getSearches}/>
