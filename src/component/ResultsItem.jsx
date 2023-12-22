@@ -11,7 +11,6 @@ class ResultsItem extends React.Component{
     return(
       <section>
         <ListGroup style={{ width: '50rem', textAlign: 'left' }}>
-        {/* {this.props.title} */}
           <ListGroup.Item>
           <a href={this.props.link}>{this.props.title}</a>
           </ListGroup.Item>
