@@ -31,9 +31,9 @@ class App extends React.Component{
     }
   }
   
-  async componentDidMount(){
-    this.getSearches();
-  }
+  // async componentDidMount(){
+  //   this.getSearches();
+  // }
   
   getToken = () => {
     return this.props.auth0.getIdTokenClaims()
