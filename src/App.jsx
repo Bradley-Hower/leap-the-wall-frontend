@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css'
 import axios from 'axios';
-import { BrowserRouter, Routes, Route, Navigate} from 'react-router-dom';
+import { BrowserRouter, Routes, Route} from 'react-router-dom';
 import ErrorAlert from './component/ErrorAlert';
 import SearchForm from './component/SearchForm';
 import Results from './component/Results';
@@ -11,7 +11,6 @@ import LoginButton from './Login';
 import LogoutButton from './Logout';
 import { withAuth0 } from '@auth0/auth0-react';
 import { Navbar, NavItem } from 'react-bootstrap';
-import { Link } from "react-router-dom";
 import Username from './Username';
 
 class App extends React.Component{
@@ -31,7 +30,7 @@ class App extends React.Component{
       pn: 0,
     }
   }
-
+  
   async componentDidMount(){
     this.getSearches();
   }
@@ -104,7 +103,6 @@ class App extends React.Component{
           });
         })
         .catch(error => {
-          // console.log('Connection not quite right', error.response.status);
           this.setState({errorcode: error})
           this.setState({showForm: true})
         });
@@ -114,14 +112,12 @@ class App extends React.Component{
       console.log('Awaiting Baidu');
       axios.get(`${import.meta.env.VITE_SERVER}/baidu?pn=${this.state.pn}&baiduquery=${this.state.firstquery}`)
       .then(response => {
-        // const stringy = JSON.stringify(response.data);   
         this.setState({ baiduresults: response.data.baidudata }, () => {
           console.log('Baidu Results Set:', this.state.baiduresults);
           this.finalthandoff();
         });
       })
       .catch(error => {
-        // console.log('Connection not quite right', error.response.status);
         this.setState({errorcode: error});
         this.setState({showForm: true});
       })
@@ -133,11 +129,11 @@ class App extends React.Component{
     for(let i=0; i<30; i++){
 
       const itemarray = []
+      if(this.state.baiduresults.organic_results[i] === undefined){continue}
       await axios.post(`${import.meta.env.VITE_SERVER}/tfinal?pn=${this.state.pn}&qs=${this.state.baiduresults.organic_results[i].title}`)
         .then(response => {
           itemarray.push(response.data[0].finaljson)
         }).catch(error => {
-          // console.log('Connection not quite right', error.response.status);
           this.setState({errorcode: error});
           this.setState({showForm: true});
         })
@@ -145,7 +141,6 @@ class App extends React.Component{
       .then(response => {
         itemarray.push(response.data[0].finaljson)
       }).catch(error => {
-        // console.log('Connection not quite right', error.response.status);
         this.setState({errorcode: error});
         this.setState({showForm: true});
       })
@@ -156,19 +151,14 @@ class App extends React.Component{
       this.setState({searchResults: [...this.state.searchResults, thearray]});
       this.setState({queryhistory: [...this.state.queryhistory, thearray]});
     }
+    if(this.props.auth0.user.email){
     this.postSearch({
+      email: this.props.auth0.user.email,
       timestamp: new Date(),
       query: this.state.searchQuery,
       data: thearray,
-    })
-
-    console.log(thearray)
-    
-    console.log(this.state.searchResults)
+    })}
   }
-
-
-
 
   handleChange = (e) => {
     this.setState({ searchQuery : e.target.value })
@@ -176,10 +166,7 @@ class App extends React.Component{
 
   setpageNumber = (e) => {
     this.setState({ pn : (e.target.value) *30+30 })
-    console.log(this.state.pn)
   }
-
-
   
   render(){
   return (
@@ -188,27 +175,20 @@ class App extends React.Component{
         <div class="formholder">
         <SearchForm handleform={this.handleForm} handlechange={this.handleChange} setpageNumber={this.setpageNumber}/>
 
-        {this.state.searchResults && <Navigate to='/search' />}
         <Routes>
-
         <Route path='/' element={<></>} />
-
           <Route exact path='/search' element={
             <>
               <Explorer searchQuery={this.state.searchQuery} clearState={this.state.clearState}/>
 
             </>
           }/>
-
         </Routes>
 
         <div class="bigblock">
         <Navbar collapseOnSelect expand="lg" >
-
-        <NavItem><Link to="/profile" className="nav-link">Profile</Link></NavItem>
-        <NavItem>{this.props.auth0.isAuthenticated ? <div><p>Welcome back, </p><Username /></div> : <p></p>}</NavItem>
+        <NavItem>{this.props.auth0.isAuthenticated ? <div><Username /></div> : <p></p>}</NavItem>
         <NavItem>{this.props.auth0.isAuthenticated ? <LogoutButton/> : <LoginButton/>}</NavItem>
-
         </Navbar>
           <h4>History</h4>
           {this.state.searches.length > 0 ? (
@@ -216,16 +196,17 @@ class App extends React.Component{
           ) : (
             <p>No searches yet.</p>
           )}
-
         </div>
 
         </div>
         </BrowserRouter>
+
         <div class='rendered'> 
         {this.state.searchResults.length > 0 && 
         <Results searchResults={this.state.searchResults} getSearches={this.getSearches}/>
         }
         </div>
+
         <ErrorAlert showForm={this.state.showForm} toggleForm={this.state.toggleForm} errorcode={this.state.errorcode}/>
       </>
     )

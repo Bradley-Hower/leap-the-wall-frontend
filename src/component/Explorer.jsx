@@ -8,12 +8,8 @@ class Explorer extends React.Component {
   render(){
     return(
       <main>
-        {/* <Link to='/' onClick={this.props.clearState}>Go Home</Link> */}
         <section>
-  
           {/* <Image src={``} thumbnail/> */}
-
-
         </section>
       </main>
     )
